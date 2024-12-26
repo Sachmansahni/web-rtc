@@ -1,0 +1,44 @@
+webrtc is a prebuilt technology in our browsers
+it is a way to connect two different browsers
+no third party server or cloud needed 
+transfer files and videos 
+data sharing 
+tcp -> transmission control protocol ... whatsapp chat , sockets , arrange and monitor packets to not loose and maintain order ...
+udp -> user datagram protocol ... low overhead ... used in videocalls 
+in tcp we require a server to transfer of files and data 
+but udp can work all alone without server
+high chances of data loss and corruption in udp
+but udp is best for video calls
+udp is not reliable 
+can work directly on the basis of IP ADDRESSES 
+
+does your browser know your ip address?
+-> no it doesnt 
+-> your device knows your private ip address but not the public ip address
+-> a device is not directly exposed to the public internet
+-> devices are generally connected to router and router are connected to the internet 
+-> for connecting directly to the other device without the server help the device needs to know its public ip address
+
+-> the first component required for this is turn server or ice server 
+-> router sends the request to the ice or the turn server and the server returns us the ip of the machine from where the request is coming and router further sends this info to us
+ 
+-> once you get to know each others public ips , you can now exchange data 
+
+## signalling 
+    -> you send your info (ip,addre) to the other machine 
+    -> can be done through email and whatsapp but no sense 
+    -> you create a basic socket server that is responsible to share the ip addresses 
+    -> through a node server , we share a (sdp) session description -> who am i , what is my public ip -> there is a exchange of sdp between both the machines
+    -> once the sdps are exchanged , now you can directly connect and share to each other 
+    -> share data over upd connection without worrying about the privace concerns 
+    -> the main disadvantage of this technology is that only 2 people can connect through webrtc
+    -> connection between more than 2 computers can also be made but only using a mesh connectivity ... that is connect each node to every other node 
+    -> not scalable 
+    -> so we use sfu(selective forwarding unit ) -> in this architecture we need server but as a client 
+    -> run a vm on the server and connect all the clients to it 
+    -> creates a big frame having the videos of all the connected nodes and then share the whole frame as a single stream to all the connected nodes 
+
+
+// express and bodyparser help us with the APIs
+// socket.io helps us in creating a signalling server
+
